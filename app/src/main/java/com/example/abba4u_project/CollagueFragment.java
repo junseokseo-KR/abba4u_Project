@@ -5,18 +5,20 @@ package com.example.abba4u_project;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.Loader;
 import android.text.Layout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -31,11 +33,13 @@ import com.xiaopo.flying.sticker.ZoomIconEvent;
 
 import java.util.Arrays;
 
+import static com.example.abba4u_project.Module.staticData.CutBitmap;
+
 public class CollagueFragment extends Fragment implements View.OnClickListener{
     public CollagueFragment(){}
     StickerView stickerView;
     TextSticker sticker;
-    Button btnReset,btnReplace,btnRemove,btnRemoveAll,btnLock,btnAdd;
+    Button btnReset,btnReplace,btnRemove,btnRemoveAll,btnLock, btnLoad;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +95,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
                     stickerView.replace(sticker);
                     stickerView.invalidate();
                 }
+                Log.i("선택된 스티커",sticker.toString());
             }
 
             @Override
@@ -123,11 +128,13 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
     }
     private void loadSticker() {
 
-        Drawable drawable =
-                ContextCompat.getDrawable(getActivity(), R.drawable.haizewang_215);
+        if(CutBitmap!=null) {
+            Drawable drawable = new BitmapDrawable(CutBitmap);
+            stickerView.addSticker(new DrawableSticker(drawable));
+        }
         Drawable drawable1 =
                 ContextCompat.getDrawable(getActivity(), R.drawable.haizewang_23);
-        stickerView.addSticker(new DrawableSticker(drawable));
+
         stickerView.addSticker(new DrawableSticker(drawable1), Sticker.Position.BOTTOM | Sticker.Position.RIGHT);
 
         Drawable bubble = ContextCompat.getDrawable(getActivity(), R.drawable.bubble);
@@ -153,6 +160,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
 
     public void testRemove(View view) {
         if (stickerView.removeCurrentSticker()) {
+            Log.i("선택된 스티커", String.valueOf(stickerView.removeCurrentSticker()));
             Toast.makeText(getActivity(), "Remove current Sticker successfully!", Toast.LENGTH_SHORT)
                     .show();
         } else {
@@ -183,7 +191,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
     }
     private  void setBtn(View v){
         btnReset = v.findViewById(R.id.btnReset);
-        btnAdd = v.findViewById(R.id.btnAdd);
+        btnLoad = v.findViewById(R.id.btnAdd2);
         btnReplace = v.findViewById(R.id.btnReplace);
         btnRemove = v.findViewById(R.id.btnRemove);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
@@ -191,7 +199,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
 
         btnReset.setOnClickListener(this);
         btnLock.setOnClickListener(this);
-        btnAdd.setOnClickListener(this);
+        btnLoad.setOnClickListener(this);
         btnRemove.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
         btnReplace.setOnClickListener(this);
@@ -202,7 +210,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
             case R.id.btnReset:
                 reset(v);
                 break;
-            case R.id.btnAdd:
+            case R.id.btnAdd2:
                 testAdd(v);
                 break;
             case R.id.btnRemove:
@@ -219,4 +227,5 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
                 break;
         }
     }
+
 }

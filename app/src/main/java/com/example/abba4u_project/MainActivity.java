@@ -70,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
                     return new CollagueFragment();
                 case 2:
                     return new MandalaFragment();
-                    default:
-                        return null;
+                default:
+                    return null;
             }
         }
 

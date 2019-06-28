@@ -26,6 +26,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
+import static com.example.abba4u_project.Module.staticData.MainBitmap;
+
 public class GetImageActivity extends Activity {
     private static final int PICK_FROM_ALBUM = 1;
     private File tempFile;
@@ -60,14 +62,10 @@ public class GetImageActivity extends Activity {
     }
     public void goToCut(View v){
         Intent intent = new Intent(getApplicationContext(), LassoCutActivity.class);
-        sendBitmap = ((BitmapDrawable)photoView.getDrawable()).getBitmap();
+        // sendBitmap = ((BitmapDrawable)photoView.getDrawable()).getBitmap();
 
         //TODO : 비트맵 널값 체크!!
-        if(sendBitmap != null){
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            sendBitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-            byte[] byteArray = stream.toByteArray();
-            intent.putExtra("image",byteArray);
+        if(MainBitmap != null){
             startActivity(intent);
         }else{
             Toast.makeText(getApplicationContext(),R.string.NoSettingImg,Toast.LENGTH_SHORT).show();
@@ -76,27 +74,29 @@ public class GetImageActivity extends Activity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==PICK_FROM_ALBUM){
-            Uri photoUri = data.getData();
-            Cursor cursor = null;
-            try{
-                String[] proj = {MediaStore.Images.Media.DATA};
+        if(requestCode==PICK_FROM_ALBUM) {
+            if (data != null) {
+                Uri photoUri = data.getData();
+                Cursor cursor = null;
+                try {
+                    String[] proj = {MediaStore.Images.Media.DATA};
 
-                assert photoUri != null;
-                cursor = getContentResolver().query(photoUri,proj,null,null,null);
+                    assert photoUri != null;
+                    cursor = getContentResolver().query(photoUri, proj, null, null, null);
 
-                assert cursor != null;
-                int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                    assert cursor != null;
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
 
-                cursor.moveToFirst();
+                    cursor.moveToFirst();
 
-                tempFile = new File(cursor.getString(column_index));
-            }finally {
-                if(cursor != null){
-                    cursor.close();
+                    tempFile = new File(cursor.getString(column_index));
+                } finally {
+                    if (cursor != null) {
+                        cursor.close();
+                    }
                 }
+                setImage();
             }
-            setImage();
         }
     }
 
@@ -104,6 +104,7 @@ public class GetImageActivity extends Activity {
         photoView = findViewById(R.id.photoview);
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(),options);
+        MainBitmap=originBm;
         photoView.setImageBitmap(originBm);
     }
 
