@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,11 +22,13 @@ import android.widget.Toast;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.xiaopo.flying.sticker.DrawableSticker;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
+import static com.example.abba4u_project.Module.staticData.CutBitmap;
 import static com.example.abba4u_project.Module.staticData.MainBitmap;
 
 public class GetImageActivity extends Activity {
@@ -33,12 +36,24 @@ public class GetImageActivity extends Activity {
     private File tempFile;
     PhotoView photoView;
     Bitmap sendBitmap;
+    @Override
+    protected void onStart() {
+
+        super.onStart();
+        if(CutBitmap!=null)
+        {
+
+            photoView.setImageDrawable(new BitmapDrawable(CutBitmap));
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_main);
         tedPermission();
+        photoView = findViewById(R.id.photoview);
     }
     private void tedPermission(){
         PermissionListener permissionListener =  new PermissionListener(){
@@ -101,22 +116,32 @@ public class GetImageActivity extends Activity {
     }
 
     private void setImage() {
-        photoView = findViewById(R.id.photoview);
         BitmapFactory.Options options = new BitmapFactory.Options();
         Bitmap originBm = BitmapFactory.decodeFile(tempFile.getAbsolutePath(),options);
         MainBitmap=originBm;
         photoView.setImageBitmap(originBm);
     }
 
-    public void addImage(View v){
-        Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-        Bitmap sendBitmap = BitmapFactory.decodeResource(getResources(),photoView.getImageAlpha());
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        sendBitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-        byte[] byteArray = stream.toByteArray();
-        intent.putExtra("image",byteArray);
-        startActivity(intent);
-    }
+    public void addImage(View v) {
 
+
+        if (CutBitmap != null) {
+            finish();
+
+            CollagueFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(CutBitmap)));
+        } else if(MainBitmap!=null){
+            finish();
+            CollagueFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(MainBitmap)));
+        }else
+        {
+            Toast.makeText(getApplicationContext(),"이미지가 없습니다.",Toast.LENGTH_SHORT).show();
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CutBitmap=null;
+        MainBitmap=null;
+    }
 
 }

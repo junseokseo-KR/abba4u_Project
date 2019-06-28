@@ -34,7 +34,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/btnAdd"/>
+                android:id="@+id/btnAdd"
+                android:onClick="addImage"/>
         </TableRow>
     </TableLayout>
 </RelativeLayout>

@@ -27,6 +27,12 @@ public class CropActivity extends AppCompatActivity {
         super.onBackPressed();
         d=false;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        d = false;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +62,8 @@ public class CropActivity extends AppCompatActivity {
         compositeImageView = (ImageView) findViewById(R.id.imageview);
 
 
-        final        Bitmap resultingImage = Bitmap.createBitmap(widthOfscreen, heightOfScreen, bitmap.getConfig());
-       // Bitmap resultingImage = Bitmap.createBitmap(500, 500, bitmap.getConfig());
+        final Bitmap resultingImage = Bitmap.createBitmap(widthOfscreen, heightOfScreen, bitmap.getConfig());
+        // Bitmap resultingImage = Bitmap.createBitmap(500, 500, bitmap.getConfig());
 
         Canvas canvas = new Canvas(resultingImage);
         Paint paint = new Paint();
@@ -99,10 +105,5 @@ public class CropActivity extends AppCompatActivity {
                 finish();
             }
         }.start();
-
-
-
-
-
     }
 }

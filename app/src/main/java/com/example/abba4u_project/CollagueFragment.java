@@ -4,6 +4,8 @@
 package com.example.abba4u_project;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -12,7 +14,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.Loader;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -34,12 +35,14 @@ import com.xiaopo.flying.sticker.ZoomIconEvent;
 import java.util.Arrays;
 
 import static com.example.abba4u_project.Module.staticData.CutBitmap;
+import static com.example.abba4u_project.Module.staticData.MainBitmap;
+import static com.example.abba4u_project.Module.staticData.SelectBitmap;
 
 public class CollagueFragment extends Fragment implements View.OnClickListener{
     public CollagueFragment(){}
-    StickerView stickerView;
+    public static StickerView stickerView;
     TextSticker sticker;
-    Button btnReset,btnReplace,btnRemove,btnRemoveAll,btnLock, btnLoad;
+    private Button btnReset,btnReplace,btnRemove,btnRemoveAll,btnLock, btnLoad, btnModify,btnAdd,btnSave;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,7 +98,7 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
                     stickerView.replace(sticker);
                     stickerView.invalidate();
                 }
-                Log.i("선택된 스티커",sticker.toString());
+                SelectBitmap=((BitmapDrawable)stickerView.getCurrentSticker().getDrawable()).getBitmap();
             }
 
             @Override
@@ -126,25 +129,12 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
         setBtn(layout);
         return layout;
     }
-    private void loadSticker() {
 
+    private void loadSticker() {
         if(CutBitmap!=null) {
             Drawable drawable = new BitmapDrawable(CutBitmap);
             stickerView.addSticker(new DrawableSticker(drawable));
         }
-        Drawable drawable1 =
-                ContextCompat.getDrawable(getActivity(), R.drawable.haizewang_23);
-
-        stickerView.addSticker(new DrawableSticker(drawable1), Sticker.Position.BOTTOM | Sticker.Position.RIGHT);
-
-        Drawable bubble = ContextCompat.getDrawable(getActivity(), R.drawable.bubble);
-        stickerView.addSticker(
-                new TextSticker(getActivity().getApplicationContext())
-                        .setDrawable(bubble)
-                        .setText("Sticker\n")
-                        .setMaxTextSize(14)
-                        .resizeText()
-                , Sticker.Position.TOP);
     }
     public void testReplace(View view) {
         if (stickerView.replace(sticker)) {
@@ -173,12 +163,8 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
         stickerView.removeAllStickers();
     }
 
-    public void reset(View view) {
-        stickerView.removeAllStickers();
-        loadSticker();
-    }
 
-    public void testAdd(View view) {
+    public void testLoad(View view) {
 //        final TextSticker sticker = new TextSticker(getActivity());
 //        sticker.setText("Hello, world!");
 //        sticker.setTextColor(Color.BLUE);
@@ -187,31 +173,60 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
 //
 //        stickerView.addSticker(sticker);
         Intent intent = new Intent(getActivity().getApplicationContext(),GetImageActivity.class);
+
         startActivity(intent);
     }
+    public void testModify(View view){
+        if(SelectBitmap == null){
+            Toast.makeText(getActivity(), "선택된 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            testLoad(view);
+        }
+    }
+    public void stickerAdd(View view){
+        if(SelectBitmap == null){
+            Toast.makeText(getActivity(), "선택된 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
+        }else{
+
+            stickerView.addSticker(new DrawableSticker(new BitmapDrawable(SelectBitmap)));
+
+        }
+    }
+
+    public void SaveImage(View v)
+    {
+        //결과를 저장하는 비트맵
+        Bitmap bitmap=stickerView.createBitmap();
+    }
     private  void setBtn(View v){
-        btnReset = v.findViewById(R.id.btnReset);
+
         btnLoad = v.findViewById(R.id.btnAdd2);
         btnReplace = v.findViewById(R.id.btnReplace);
         btnRemove = v.findViewById(R.id.btnRemove);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
         btnLock = v.findViewById(R.id.btnLock);
+        btnModify = v.findViewById(R.id.btnModify);
+        btnAdd = v.findViewById(R.id.btnAdd);
+        btnSave=v.findViewById(R.id.btnSave);
 
-        btnReset.setOnClickListener(this);
+        btnModify.setOnClickListener(this);
+        btnLoad.setOnClickListener(this);
         btnLock.setOnClickListener(this);
         btnLoad.setOnClickListener(this);
         btnRemove.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
         btnReplace.setOnClickListener(this);
+        btnAdd.setOnClickListener(this);
+        btnSave.setOnClickListener(this);
     }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btnReset:
-                reset(v);
+            case R.id.btnLoad:
+                loadSticker();
                 break;
             case R.id.btnAdd2:
-                testAdd(v);
+                testLoad(v);
                 break;
             case R.id.btnRemove:
                 testRemove(v);
@@ -224,6 +239,15 @@ public class CollagueFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.btnLock:
                 testLock(v);
+                break;
+            case R.id.btnModify:
+                testModify(v);
+                break;
+            case R.id.btnAdd:
+                stickerAdd(v);
+                break;
+            case R.id.btnSave:
+                SaveImage(v);
                 break;
         }
     }

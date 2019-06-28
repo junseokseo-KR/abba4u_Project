@@ -6,118 +6,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:background="#E5E5E5"
     tools:context="com.example.abba4u_project.MainActivity">
-<LinearLayout
-    android:id="@+id/collague_main"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:layout_margin="15dp"
-    android:background="@drawable/canvas_layout"
-    >
-    <com.xiaopo.flying.sticker.StickerView
-        android:id="@+id/sticker_view"
+    <LinearLayout
+        android:id="@+id/collague_main"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        app:showBorder="true"
-        app:showIcons="true"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="15dp"
+        android:background="@drawable/canvas_layout"
         >
-
-        <com.github.chrisbanes.photoview.PhotoView
+        <com.xiaopo.flying.sticker.StickerView
+            android:id="@+id/sticker_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            />
-    </com.xiaopo.flying.sticker.StickerView>
-
-
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        android:scrollbars="none"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            app:showBorder="true"
+            app:showIcons="true"
             >
-            <Button
-                android:text="삽입"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnAdd"/>
-            <Button
-                android:text="수정"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnModify"/>
-            <Button
-                android:text="불러오기"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnLoad"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="Reset"
-                android:textColor="#ffffff"
-                android:id="@+id/btnReset"
+
+            <com.github.chrisbanes.photoview.PhotoView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 />
 
-            <Button
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                />
+        </com.xiaopo.flying.sticker.StickerView>
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:backgroundTint="#ffffff" -->
+        <!---->
+        <!--/>-->
+        <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/btnMain"-->
+        <!--app:fabSize="normal"-->
+        <!--android:src="@drawable/baseline_add_white_18dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--/>-->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:scrollbars="none"
+            >
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="Replace"
-                android:textColor="#ffffff"
-                android:id="@+id/btnReplace"
-                />
+                android:orientation="horizontal"
+                >
+                <Button
+                    android:text="삽입"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnAdd"/>
+                <Button
+                    android:text="수정"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnModify"/>
+                <Button
+                    android:text="불러오기"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnLoad"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Reset"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnReset"
+                    />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="Remove"
-                android:textColor="#ffffff"
-                android:id="@+id/btnRemove"
-                />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Replace"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnReplace"
+                    />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="RemoveAll"
-                android:textColor="#ffffff"
-                android:id="@+id/btnRemoveAll"
-                />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Remove"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnRemove"
+                    />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="Lock"
-                android:textColor="#ffffff"
-                android:id="@+id/btnLock"
-                />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="RemoveAll"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnRemoveAll"
+                    />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:text="Add"
-                android:textColor="#ffffff"
-                android:id="@+id/btnAdd2"
-                />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Lock"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnLock"
+                    />
 
-        </LinearLayout>
-    </HorizontalScrollView>
-</LinearLayout>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Add"
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnAdd2"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:text="Save"
+
+                    android:textColor="#ffffff"
+                    android:id="@+id/btnSave"
+                    />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 </RelativeLayout>

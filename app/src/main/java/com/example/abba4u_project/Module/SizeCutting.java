@@ -127,9 +127,9 @@ public class SizeCutting {
                 resW++;
             }
             if(SizeCutting_Life)
-            return res;
+                return res;
             else
-            return null;
+                return null;
         } else {
 
             return null;

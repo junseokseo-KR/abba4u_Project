@@ -7,4 +7,5 @@ public class staticData {
     public static Bitmap CutBitmap=null;
     public static Bitmap MainBitmap=null;
     public static Bitmap MirrorBitmap=null;
+    public static Bitmap SelectBitmap=null;
 }

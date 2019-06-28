@@ -13,17 +13,9 @@ import com.example.abba4u_project.Module.SomeView;
 import com.github.chrisbanes.photoview.PhotoView;
 
 public class LassoCutActivity extends AppCompatActivity {
-//    Bitmap image;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.losaacut_layout);
-//        setContentView(R.layout.losaacut_layout);
-        //     PhotoView BigImage = (PhotoView) findViewById(R.id.photoview2);
-        //   BigImage.setImageBitmap(image);
-
-
     }
 }

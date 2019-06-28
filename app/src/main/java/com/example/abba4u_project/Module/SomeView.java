@@ -103,7 +103,7 @@ public class SomeView extends View implements View.OnTouchListener {
     @Override
     public void onDraw(Canvas canvas) {
         canvas.drawBitmap(bitmap, 0, 0, null);
-System.out.println("1111111111111111");
+        System.out.println("1111111111111111");
         Path path = new Path();
         boolean first = true;
 
