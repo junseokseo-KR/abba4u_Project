@@ -9,27 +9,24 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.abba4u_project.Module.Fragment.CollageFragment;
 import com.github.chrisbanes.photoview.PhotoView;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 import com.xiaopo.flying.sticker.DrawableSticker;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.List;
 
-import static com.example.abba4u_project.Module.staticData.CutBitmap;
-import static com.example.abba4u_project.Module.staticData.MainBitmap;
+import static com.example.abba4u_project.staticData.CutBitmap;
+import static com.example.abba4u_project.staticData.MainBitmap;
 
 public class GetImageActivity extends Activity {
     private static final int PICK_FROM_ALBUM = 1;
@@ -42,7 +39,6 @@ public class GetImageActivity extends Activity {
         super.onStart();
         if(CutBitmap!=null)
         {
-
             photoView.setImageDrawable(new BitmapDrawable(CutBitmap));
         }
     }
@@ -128,10 +124,10 @@ public class GetImageActivity extends Activity {
         if (CutBitmap != null) {
             finish();
 
-            CollagueFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(CutBitmap)));
+            CollageFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(CutBitmap)));
         } else if(MainBitmap!=null){
             finish();
-            CollagueFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(MainBitmap)));
+            CollageFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(MainBitmap)));
         }else
         {
             Toast.makeText(getApplicationContext(),"이미지가 없습니다.",Toast.LENGTH_SHORT).show();

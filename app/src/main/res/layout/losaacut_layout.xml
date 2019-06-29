@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/fff"
-        android:name="com.example.abba4u_project.Module.LassoCutFragment"
+        android:name="com.example.abba4u_project.Module.Fragment.LassoCutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

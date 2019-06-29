@@ -15,19 +15,24 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.abba4u_project.Module.Adapter.MainPagerAdapter;
+
 public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout tabLayout;
+    MainPagerAdapter pa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        viewPager = findViewById(R.id.vp);
-        tabLayout = findViewById(R.id.tabLayout);
+        pa = new MainPagerAdapter(getSupportFragmentManager());
 
-        viewPager.setAdapter(new pageAdapter(getSupportFragmentManager()));
-        viewPager.setCurrentItem(0);
+        viewPager = findViewById(R.id.vp);
+        viewPager.setAdapter(pa);
+
+        tabLayout = findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -53,31 +58,4 @@ public class MainActivity extends AppCompatActivity {
             viewPager.setCurrentItem(tag);
         }
     };
-
-
-    private class pageAdapter extends FragmentStatePagerAdapter {
-
-        public pageAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int i) {
-            switch (i){
-                case 0:
-                    return new PictureFragment();
-                case 1:
-                    return new CollagueFragment();
-                case 2:
-                    return new MandalaFragment();
-                default:
-                    return null;
-            }
-        }
-
-        @Override
-        public int getCount() {
-            return 3;
-        }
-    }
 }

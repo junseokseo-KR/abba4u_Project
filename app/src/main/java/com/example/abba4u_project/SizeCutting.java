@@ -1,9 +1,9 @@
-package com.example.abba4u_project.Module;
+package com.example.abba4u_project;
 
 import android.graphics.Bitmap;
 
-import static com.example.abba4u_project.Module.staticData.CutBitmap;
-import static com.example.abba4u_project.Module.staticData.MirrorBitmap;
+import static com.example.abba4u_project.staticData.CutBitmap;
+import static com.example.abba4u_project.staticData.MirrorBitmap;
 
 public class SizeCutting {
     boolean SizeCutting_Life=true;

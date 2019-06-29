@@ -1,12 +1,12 @@
 package com.example.abba4u_project;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.preference.PreferenceActivity;
 
-public class LassoCutActivity extends AppCompatActivity {
+public class ColorPreferenceActiviy extends PreferenceActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.losaacut_layout);
+        addPreferencesFromResource(R.xml.colorpreference);
     }
 }

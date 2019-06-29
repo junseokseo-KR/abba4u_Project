@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:tool="http://schemas.android.com/tools"
-    tool:context=".Module.CropActivity">
+    tool:context=".CropActivity">
 
     <ImageView
         android:id="@+id/imageview"

@@ -1,4 +1,4 @@
-package com.example.abba4u_project.Module;
+package com.example.abba4u_project;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,7 +21,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.example.abba4u_project.Module.staticData.MainBitmap;
+import static com.example.abba4u_project.staticData.MainBitmap;
 
 public class SomeView extends View implements View.OnTouchListener {
     private Paint paint;

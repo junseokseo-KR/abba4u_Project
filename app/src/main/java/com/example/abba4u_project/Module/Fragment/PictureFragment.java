@@ -1,4 +1,4 @@
-package com.example.abba4u_project;
+package com.example.abba4u_project.Module.Fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.example.abba4u_project.R;
 
 public class PictureFragment extends Fragment {
     public PictureFragment(){}

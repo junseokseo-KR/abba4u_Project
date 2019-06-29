@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <yuku.ambilwarna.widget.AmbilWarnaPreference
+        android:key="pref1"
+        android:defaultValue="0xffff9900"
+        app:supportsAlpha="false"
+        android:title="no alpha" />
+    <yuku.ambilwarna.widget.AmbilWarnaPreference
+        android:key="pref2"
+        android:defaultValue="0xffff9900"
+        app:supportsAlpha="true"
+        android:title="alpha" />
+</PreferenceScreen>

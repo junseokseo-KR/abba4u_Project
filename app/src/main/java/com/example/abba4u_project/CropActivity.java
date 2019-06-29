@@ -1,4 +1,4 @@
-package com.example.abba4u_project.Module;
+package com.example.abba4u_project;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,9 +12,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.widget.ImageView;
 
-import com.example.abba4u_project.R;
 
-import static com.example.abba4u_project.Module.staticData.inputstate;
+import static com.example.abba4u_project.staticData.inputstate;
 
 public class CropActivity extends AppCompatActivity {
 
