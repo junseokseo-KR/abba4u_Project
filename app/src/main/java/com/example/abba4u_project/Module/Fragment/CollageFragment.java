@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +45,13 @@ import com.xiaopo.flying.sticker.StickerView;
 import com.xiaopo.flying.sticker.TextSticker;
 import com.xiaopo.flying.sticker.ZoomIconEvent;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 
 import static com.example.abba4u_project.staticData.SelectBitmap;
 import static com.example.abba4u_project.staticData.SelectTextSticker;
@@ -55,7 +63,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
     public static StickerView stickerView;
     TextSticker sticker;
-    private Button btnRemoveAll, btnLock, btnLoad, btnSave;
+    private Button btnRemoveAll, btnLock, btnLoad, btnSave,btnScreenShot;
 
 
     @Override
@@ -255,8 +263,27 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             dialog.setDialogListener(new SaveDialogListener() {
                 @Override
                 public void onPositiveClicked() {
+                    String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/Abba";
+                    File file = new File(path);
+                    if (!file.exists()){
+                        file.mkdirs();
+                        Toast.makeText(getContext(),"저장 폴더가 생성되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
+                    SimpleDateFormat day = new SimpleDateFormat("yyyyMMddHHmmss");
+                    Date date = new Date();
+                    FileOutputStream fos = null;
                     Bitmap resultBitmap = stickerView.createBitmap();
-                    stickerView.addSticker(new DrawableSticker(new BitmapDrawable(resultBitmap)));
+                    try{
+                        fos = new FileOutputStream(path+"/결과물"+day.format(date)+".jpeg");
+                        resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                        getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://"+path+"/결과물"+day.format(date)+".jpeg")));
+                        fos.flush();
+                        fos.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 @Override
@@ -270,16 +297,22 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    public void ScreenShot(View v){
+        Bitmap resultBitmap = stickerView.createBitmap();
+        stickerView.addSticker(new DrawableSticker(new BitmapDrawable(resultBitmap)));
+    }
     private void setBtn(View v) {
         btnLoad = v.findViewById(R.id.btnLoad);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
         btnLock = v.findViewById(R.id.btnLock);
         btnSave = v.findViewById(R.id.btnSave);
+        btnScreenShot = v.findViewById(R.id.btnScreenShot);
 
         btnLoad.setOnClickListener(this);
         btnLock.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
         btnSave.setOnClickListener(this);
+        btnScreenShot.setOnClickListener(this);
     }
 
     @Override
@@ -296,6 +329,9 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnSave:
                 SaveImage(v);
+                break;
+            case R.id.btnScreenShot:
+                ScreenShot(v);
                 break;
         }
     }
