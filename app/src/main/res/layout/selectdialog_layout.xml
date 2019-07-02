@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:id="@+id/selectIcon"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/sticker_color" />
+
+        <TextView
+            android:id="@+id/selecttext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="@string/selectdialog_msg"
+            android:textAlignment="center"
+            android:textColor="#f6bb42"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/selecttext2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquarel"
+            android:text="@string/selectdialog_msg2"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/selectdialog_imgBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/selectdialog_imgstickerbtn"
+                    android:text="이미지"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/selectdialog_txtBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/selectdialog_txtstickerbtn"
+                    android:text="텍스트"
+                    android:textColor="#F6BB42"
+                    android:textSize="20dp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>

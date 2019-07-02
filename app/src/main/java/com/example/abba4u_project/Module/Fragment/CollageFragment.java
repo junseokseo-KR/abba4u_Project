@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
@@ -22,6 +23,8 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -32,8 +35,10 @@ import com.example.abba4u_project.ModifyImageActivity;
 import com.example.abba4u_project.ModifyTextStickerActivity;
 import com.example.abba4u_project.Module.Dialog.RemoveAllDIalog;
 import com.example.abba4u_project.Module.Dialog.SaveDialog;
+import com.example.abba4u_project.Module.Dialog.SelectDialog;
 import com.example.abba4u_project.Module.Listener.RemoveAllDialogListener;
 import com.example.abba4u_project.Module.Listener.SaveDialogListener;
+import com.example.abba4u_project.Module.Listener.SelectDialogListener;
 import com.example.abba4u_project.R;
 import com.xiaopo.flying.sticker.BitmapStickerIcon;
 import com.xiaopo.flying.sticker.DeleteIconEvent;
@@ -63,7 +68,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
     public static StickerView stickerView;
     TextSticker sticker;
-    private Button btnRemoveAll, btnLock, btnLoad, btnSave,btnScreenShot;
+    private FloatingActionButton btnRemoveAll, btnLoad, btnSave,btnScreenShot;
 
 
     @Override
@@ -173,10 +178,6 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void testLock(View view) {
-        stickerView.setLocked(!stickerView.isLocked());
-    }
-
     public void stickerRemoveAll(View view) {
         if (stickerView.getStickerCount() != 0) {
             RemoveAllDIalog dIalog = new RemoveAllDIalog();
@@ -220,27 +221,22 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     }
 
     public void stickerLoad(View view) {
-        PopupMenu pm = new PopupMenu(getContext(), view);
-        pm.getMenuInflater().inflate(R.menu.addmenu_collage, pm.getMenu());
-        pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+        SelectDialog dialog = new SelectDialog();
+        dialog.setDialogListener(new SelectDialogListener() {
+            Intent intent;
             @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Intent intent;
-                switch (menuItem.getItemId()) {
-                    case R.id.add_img:
-                        intent = new Intent(getActivity().getApplicationContext(), GetImageActivity.class);
-                        startActivity(intent);
-                        break;
-                    case R.id.add_txt:
-                        intent = new Intent(getActivity().getApplicationContext(), GetTextStickerActivity.class);
-                        startActivityForResult(intent, 629);
-                        //629 : 텍스트이미지 추가 리퀘스트코드
-                        break;
-                }
-                return true;
+            public void onImageStickerClicked() {
+                intent = new Intent(getActivity().getApplicationContext(), GetImageActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onTextStickerClicked() {
+                intent = new Intent(getActivity().getApplicationContext(), GetTextStickerActivity.class);
+                startActivityForResult(intent, 629);
             }
         });
-        pm.show();
+        dialog.show(getActivity().getSupportFragmentManager(), "stickerLoad");
     }
 
 
@@ -304,15 +300,15 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     private void setBtn(View v) {
         btnLoad = v.findViewById(R.id.btnLoad);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
-        btnLock = v.findViewById(R.id.btnLock);
         btnSave = v.findViewById(R.id.btnSave);
         btnScreenShot = v.findViewById(R.id.btnScreenShot);
 
+
         btnLoad.setOnClickListener(this);
-        btnLock.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnScreenShot.setOnClickListener(this);
+
     }
 
     @Override
@@ -323,9 +319,6 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.btnRemoveAll:
                 stickerRemoveAll(v);
-                break;
-            case R.id.btnLock:
-                testLock(v);
                 break;
             case R.id.btnSave:
                 SaveImage(v);

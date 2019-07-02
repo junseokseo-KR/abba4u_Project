@@ -47,18 +47,17 @@ public class SomeView extends View implements View.OnTouchListener {
         mContext = c;
 
 
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((AppCompatActivity)mContext).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        ((AppCompatActivity) mContext).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         height = displayMetrics.heightPixels;
         width = displayMetrics.widthPixels;
 
         Bitmap original = MainBitmap;
-        MainBitmap=null;
-        float scale = (float) ((width/(float)original.getWidth()));
+        MainBitmap = null;
+        float scale = (float) ((width / (float) original.getWidth()));
 
-        int image_w = (int) (original.getWidth()*scale);
-        int image_h = (int) (original.getHeight()*scale);
+        int image_w = (int) (original.getWidth() * scale);
+        int image_h = (int) (original.getHeight() * scale);
 
         bitmap = Bitmap.createScaledBitmap(original, image_w, image_h, true);
 
@@ -67,14 +66,12 @@ public class SomeView extends View implements View.OnTouchListener {
         byteArray = stream.toByteArray();
 
 
-
-
         setFocusable(true);
         setFocusableInTouchMode(true);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setStyle(Paint.Style.STROKE);
-        paint.setPathEffect(new DashPathEffect(new float[] { 10, 20 }, 0));
+        paint.setPathEffect(new DashPathEffect(new float[]{10, 20}, 0));
         paint.setStrokeWidth(5);
         paint.setColor(Color.WHITE);
 
@@ -100,10 +97,11 @@ public class SomeView extends View implements View.OnTouchListener {
         bfirstpoint = false;
 
     }
+
     @Override
     public void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, null);
-        System.out.println("1111111111111111");
+        int ch = bitmap.getHeight()/2;
+        canvas.drawBitmap(bitmap, 0, ch, null);
         Path path = new Path();
         boolean first = true;
 
@@ -224,7 +222,7 @@ public class SomeView extends View implements View.OnTouchListener {
                         intent = new Intent(mContext, CropActivity.class);
                         intent.putExtra("crop", true);
                         intent.putExtra("image", byteArray);
-                        ((AppCompatActivity)mContext).finish();
+                        ((AppCompatActivity) mContext).finish();
                         mContext.startActivity(intent);
                         break;
 
@@ -235,7 +233,7 @@ public class SomeView extends View implements View.OnTouchListener {
                         intent.putExtra("crop", false);
                         intent.putExtra("image", byteArray);
                         mContext.startActivity(intent);
-                        ((AppCompatActivity)mContext).finish();
+                        ((AppCompatActivity) mContext).finish();
                         bfirstpoint = false;
                         // resetView();
 

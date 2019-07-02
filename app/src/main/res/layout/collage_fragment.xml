@@ -35,67 +35,45 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY" />
         </com.xiaopo.flying.sticker.StickerView>
-        <!--</LinearLayout>-->
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginBottom="30dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--/>-->
-
-        <!--<android.support.design.widget.FloatingActionButton-->
-        <!--android:id="@+id/btnMain"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginLeft="20dp"-->
-        <!--android:layout_marginBottom="30dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:src="@drawable/baseline_add_white_18dp"-->
-        <!--app:fabSize="normal"-->
-        <!--/>-->
-        <HorizontalScrollView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/black"
-            android:scrollbars="none">
+            android:layout_gravity="center"
+            android:orientation="horizontal">
 
-            <LinearLayout
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnLoad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
+                android:src="@drawable/sticker"
+                app:backgroundTint="#ffffff"/>
 
-                <Button
-                    android:id="@+id/btnLoad"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="불러오기" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnRemoveAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/eraser"
+                app:backgroundTint="#ffffff"/>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_add_white_18dp"
+                app:backgroundTint="#5b86e5"/>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnScreenShot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/screenshot"
+                app:backgroundTint="#ffffff"/>
 
-                <Button
-                    android:id="@+id/btnRemoveAll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="초기화" />
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download"
+                app:backgroundTint="#ffffff"/>
 
-                <Button
-                    android:id="@+id/btnLock"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lock" />
-                <Button
-                    android:id="@+id/btnScreenShot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="스크린샷" />
-                <Button
-                    android:id="@+id/btnSave"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="저장" />
-            </LinearLayout>
-        </HorizontalScrollView>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
