@@ -1,6 +1,3 @@
-/*
-    Student : 1544021 서준석 - 갤러리에서 사진 불러오기 구현
- */
 package com.example.abba4u_project;
 
 import android.Manifest;
@@ -13,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -27,8 +25,9 @@ import java.util.List;
 
 import static com.example.abba4u_project.staticData.CutBitmap;
 import static com.example.abba4u_project.staticData.MainBitmap;
+import static com.example.abba4u_project.staticData.SelectBitmap;
 
-public class GetImageActivity extends Activity {
+public class ModifyImageActivity extends Activity {
     private static final int PICK_FROM_ALBUM = 1;
     private File tempFile;
     PhotoView photoView;
@@ -36,9 +35,14 @@ public class GetImageActivity extends Activity {
     protected void onStart() {
 
         super.onStart();
-        if(CutBitmap!=null)
+        if(SelectBitmap!=null)
         {
-            photoView.setImageDrawable(new BitmapDrawable(CutBitmap));
+            photoView.setImageDrawable(new BitmapDrawable(SelectBitmap));
+            MainBitmap = SelectBitmap;
+            if (CutBitmap!=null){
+                photoView.setImageDrawable(new BitmapDrawable(CutBitmap));
+                MainBitmap = CutBitmap;
+            }
         }
     }
 
@@ -46,9 +50,9 @@ public class GetImageActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.getsticker_layout);
+        setContentView(R.layout.modifysticker_layout);
         tedPermission();
-        photoView = findViewById(R.id.photoview);
+        photoView = findViewById(R.id.photoview_Modify);
     }
     private void tedPermission(){
         PermissionListener permissionListener =  new PermissionListener(){
@@ -65,20 +69,13 @@ public class GetImageActivity extends Activity {
         };
         TedPermission.with(this).setPermissionListener(permissionListener).setRationaleMessage(R.string.permission_rational).setDeniedMessage(R.string.permission_deny).setPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA).check();
     }
-    public void goToAlbum(View v){
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-        startActivityForResult(intent,PICK_FROM_ALBUM);
-    }
     public void goToCut(View v){
         Intent intent = new Intent(getApplicationContext(), LassoCutActivity.class);
-        // sendBitmap = ((BitmapDrawable)photoView.getDrawable()).getBitmap();
-
         //TODO : 비트맵 널값 체크!!
         if(MainBitmap != null){
             startActivity(intent);
         }else{
-//            Toast.makeText(getApplicationContext(),R.string.NoSettingImg,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),R.string.NoSettingImg,Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -117,13 +114,13 @@ public class GetImageActivity extends Activity {
         photoView.setImageBitmap(originBm);
     }
 
-    public void addImage(View v) {
+    public void modifyImage(View v) {
         if (CutBitmap != null) {
             finish();
-            CollageFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(CutBitmap)));
+            CollageFragment.stickerView.replace(new DrawableSticker(new BitmapDrawable(CutBitmap)));
         } else if(MainBitmap!=null){
             finish();
-            CollageFragment.stickerView.addSticker(new DrawableSticker(new BitmapDrawable(MainBitmap)));
+            CollageFragment.stickerView.replace(new DrawableSticker(new BitmapDrawable(MainBitmap)));
         }else
         {
             Toast.makeText(getApplicationContext(),"이미지가 없습니다.",Toast.LENGTH_SHORT).show();

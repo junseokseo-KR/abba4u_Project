@@ -3,32 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ts_edit_modify"
-        />
+
     <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/ts_view_modify"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:hint="텍스트를 입력하세요"
+        android:gravity="center"/>
+
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:layout_marginBottom="10dp">
+        <TableRow
+            android:gravity="center">
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnTextColor_modify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openColorPicker"
+                android:text="색상변경"
+                android:layout_weight="1"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btnModify_TextSticker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="modifyTextSticker"
+                android:text="수정"
+                android:layout_weight="1"/>
+        </TableRow>
+    </TableLayout>
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/ts_edit_modify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:id="@+id/ts_view_modify"/>
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="색상변경"
-        android:id="@+id/btnTextColor_modify"
-        android:onClick="openColorPicker"/>
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="프레임 추가"
-        android:id="@+id/btnFrame_TextSticker_modify"/>
-    <android.support.v7.widget.AppCompatButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="스티커 만들기"
-        android:id="@+id/btnMake_TextSticker_modify"
-        android:onClick="makeTextSticker"/>
+        android:hint="텍스트를 입력하세요"/>
 </LinearLayout>

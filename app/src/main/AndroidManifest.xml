@@ -25,9 +25,10 @@
         <activity android:name=".LassoCutActivity"/>
         <activity android:name=".GetImageActivity"/>
         <activity android:name=".GetTextStickerActivity"/>
+        <activity android:name=".ModifyImageActivity"/>
         <activity android:name=".ModifyTextStickerActivity"/>
         <activity android:name=".CropActivity"/>
-
+        <activity android:name=".ColorPreferenceActiviy"/>
     </application>
 
 </manifest>

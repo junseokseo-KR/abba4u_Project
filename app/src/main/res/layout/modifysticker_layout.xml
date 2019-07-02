@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <com.github.chrisbanes.photoview.PhotoView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/photoview_Modify"
+        android:layout_centerInParent="true"/>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#99000000"
+        >
+        <TableRow>
+            <Button
+                android:text="사진자르기"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btnCut_Modify"
+                android:onClick="goToCut"/>
+            <Button
+                android:text="수정"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/btnModify"
+                android:onClick="modifyImage"/>
+        </TableRow>
+    </TableLayout>
+</RelativeLayout>

@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#E5E5E5"
     tools:context="com.example.abba4u_project.MainActivity">
+
     <LinearLayout
         android:id="@+id/collague_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="15dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/canvas_layout"
-        >
+        android:orientation="vertical">
+
         <com.xiaopo.flying.sticker.StickerView
             android:id="@+id/sticker_view"
             android:layout_width="match_parent"
@@ -23,128 +24,73 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             app:showBorder="true"
-            app:showIcons="true"
-            >
+            app:showIcons="true">
 
             <com.github.chrisbanes.photoview.PhotoView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="fitXY"
-                />
+                android:scaleType="fitXY" />
         </com.xiaopo.flying.sticker.StickerView>
+        <!--</LinearLayout>-->
+
         <!--<android.support.design.widget.FloatingActionButton-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:layout_marginLeft="20dp"-->
         <!--android:layout_marginBottom="30dp"-->
-        <!--android:backgroundTint="#ffffff" -->
-        <!---->
+        <!--android:layout_alignParentBottom="true"-->
         <!--/>-->
+
         <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/btnMain"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/btnMain"-->
-        <!--app:fabSize="normal"-->
-        <!--android:src="@drawable/baseline_add_white_18dp"-->
-        <!--android:layout_marginBottom="30dp"-->
         <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginBottom="30dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:src="@drawable/baseline_add_white_18dp"-->
+        <!--app:fabSize="normal"-->
         <!--/>-->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/black"
-            android:scrollbars="none"
-            >
+            android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
-                <Button
-                    android:text="삽입"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnAdd"
-                    android:textSize="10sp"
-                    />
-                <Button
-                    android:text="수정"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnModify"/>
-                <Button
-                    android:text="불러오기"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/btnLoad"/>
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Reset"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnReset"
-                    />
+                android:layout_gravity="center"
+                android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnLoad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Replace"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnReplace"
-                    />
+                    android:text="불러오기" />
 
                 <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Remove"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnRemove"
-                    />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="RemoveAll"
-                    android:textColor="#ffffff"
                     android:id="@+id/btnRemoveAll"
-                    />
-
-                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Lock"
-                    android:textColor="#ffffff"
+                    android:text="초기화" />
+
+                <Button
                     android:id="@+id/btnLock"
-                    />
-
-                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Add"
-                    android:textColor="#ffffff"
-                    android:id="@+id/btnAdd2"
-                    />
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:text="Save"
+                    android:text="Lock" />
 
-                    android:textColor="#ffffff"
+                <Button
                     android:id="@+id/btnSave"
-                    />
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="저장" />
             </LinearLayout>
         </HorizontalScrollView>
     </LinearLayout>

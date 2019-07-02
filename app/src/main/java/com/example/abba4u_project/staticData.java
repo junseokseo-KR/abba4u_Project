@@ -11,4 +11,5 @@ public class staticData {
     public static Bitmap MirrorBitmap=null;
     public static Bitmap SelectBitmap=null;
     public static TextSticker SelectTextSticker=null;
+    public static String selectType = "";
 }

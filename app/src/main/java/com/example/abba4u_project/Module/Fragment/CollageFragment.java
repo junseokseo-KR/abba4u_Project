@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,9 +16,8 @@ import android.support.v7.widget.PopupMenu;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -28,23 +26,28 @@ import android.widget.Toast;
 
 import com.example.abba4u_project.GetImageActivity;
 import com.example.abba4u_project.GetTextStickerActivity;
-import com.example.abba4u_project.HelloIconEvent;
+import com.example.abba4u_project.ModifyImageActivity;
 import com.example.abba4u_project.ModifyTextStickerActivity;
+import com.example.abba4u_project.Module.Dialog.RemoveAllDIalog;
+import com.example.abba4u_project.Module.Dialog.SaveDialog;
+import com.example.abba4u_project.Module.Listener.RemoveAllDialogListener;
+import com.example.abba4u_project.Module.Listener.SaveDialogListener;
 import com.example.abba4u_project.R;
 import com.xiaopo.flying.sticker.BitmapStickerIcon;
 import com.xiaopo.flying.sticker.DeleteIconEvent;
 import com.xiaopo.flying.sticker.DrawableSticker;
 import com.xiaopo.flying.sticker.FlipHorizontallyEvent;
 import com.xiaopo.flying.sticker.Sticker;
+import com.xiaopo.flying.sticker.StickerIconEvent;
 import com.xiaopo.flying.sticker.StickerView;
 import com.xiaopo.flying.sticker.TextSticker;
 import com.xiaopo.flying.sticker.ZoomIconEvent;
 
 import java.util.Arrays;
 
-import static com.example.abba4u_project.staticData.CutBitmap;
 import static com.example.abba4u_project.staticData.SelectBitmap;
 import static com.example.abba4u_project.staticData.SelectTextSticker;
+import static com.example.abba4u_project.staticData.selectType;
 
 public class CollageFragment extends Fragment implements View.OnClickListener {
     public CollageFragment() {
@@ -52,9 +55,8 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
     public static StickerView stickerView;
     TextSticker sticker;
-    TextSticker txtsticker;
-    private Button btnReset, btnReplace, btnRemove, btnRemoveAll, btnLock, btnLoad, btnModify, btnAdd, btnSave;
-    String selectType = "";
+    private Button btnRemoveAll, btnLock, btnLoad, btnSave;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -80,11 +82,13 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                 com.xiaopo.flying.sticker.R.drawable.sticker_ic_flip_white_18dp),
                 BitmapStickerIcon.RIGHT_TOP);
         flipIcon.setIconEvent(new FlipHorizontallyEvent());
-        BitmapStickerIcon heartIcon =
-                new BitmapStickerIcon(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_add_white_18dp),
+        BitmapStickerIcon modifyIcon =
+                new BitmapStickerIcon(ContextCompat.getDrawable(getActivity(), R.drawable.baseline_brush_white_18dp),
                         BitmapStickerIcon.LEFT_BOTTOM);
-        heartIcon.setIconEvent(new HelloIconEvent());
-        stickerView.setIcons(Arrays.asList(deleteIcon, zoomIcon, flipIcon, heartIcon));
+        modifyIcon.setIconEvent(new ModifyIconEvent());
+
+
+        stickerView.setIcons(Arrays.asList(deleteIcon, zoomIcon, flipIcon, modifyIcon));
 
         stickerView.setBackgroundColor(Color.WHITE);
         stickerView.setLocked(false);
@@ -108,12 +112,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             public void onStickerClicked(@NonNull Sticker sticker) {
                 if (sticker instanceof TextSticker) {
                     SelectTextSticker = (TextSticker) sticker;
-                    ((TextSticker) sticker).setTextColor(Color.RED);
-                    stickerView.replace(sticker);
-                    stickerView.invalidate();
-                    Log.i("선택된 텍스트스티커", sticker.toString());
                     selectType = "text";
-
                 } else {
                     SelectBitmap = ((BitmapDrawable) stickerView.getCurrentSticker().getDrawable()).getBitmap();
                     selectType = "img";
@@ -142,7 +141,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onStickerDoubleTapped(@NonNull Sticker sticker) {
-
+                stickerAdd();
             }
         });
         setBtn(layout);
@@ -151,39 +150,18 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 629:
-                txtsticker = new TextSticker(getActivity());
-
-                txtsticker.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.sticker_transparent_background));
-                txtsticker.setText(data.getStringExtra("textValue"));
-                txtsticker.setTextColor(data.getIntExtra("textColor", 0xff000000));
-                Log.i("스티커 정보", data.getStringExtra("textValue") + " / " + data.getIntExtra("textColor", 0xff000000));
-                txtsticker.setTextAlign(Layout.Alignment.ALIGN_CENTER);
-                txtsticker.resizeText();
-                stickerView.addSticker(txtsticker);
-                break;
-            case 630:
-                SelectTextSticker.setText(data.getStringExtra("textValue"));
-                SelectTextSticker.setTextColor(data.getIntExtra("textColor", 0xff000000));
-                SelectTextSticker.resizeText();
-                Log.i("스티커 정보", data.getStringExtra("textValue") + " / " + data.getIntExtra("textColor", 0xff000000));
-                break;
-        }
-    }
-
-    private void loadSticker() {
-        if (CutBitmap != null) {
-            Drawable drawable = new BitmapDrawable(CutBitmap);
-            stickerView.addSticker(new DrawableSticker(drawable));
-        }
-    }
-
-    public void testReplace(View view) {
-        if (stickerView.replace(sticker)) {
-            Toast.makeText(getActivity(), "Replace Sticker successfully!", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getActivity(), "Replace Sticker failed!", Toast.LENGTH_SHORT).show();
+        Log.i("코드", Integer.toString(requestCode));
+        if (data != null) {
+            switch (requestCode) {
+                case 629:
+                    makeTextSticker(stickerView, data.getStringExtra("textValue"), data.getIntExtra("textColor", 0xff000000));
+                    break;
+                case 630:
+                    SelectTextSticker.setText(data.getStringExtra("textValue"));
+                    SelectTextSticker.setTextColor(data.getIntExtra("textColor", 0xff000000));
+                    SelectTextSticker.resizeText();
+                    break;
+            }
         }
     }
 
@@ -191,30 +169,49 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         stickerView.setLocked(!stickerView.isLocked());
     }
 
-    public void testRemove(View view) {
-        if (stickerView.removeCurrentSticker()) {
-            Log.i("선택된 스티커", String.valueOf(stickerView.removeCurrentSticker()));
-            Toast.makeText(getActivity(), "Remove current Sticker successfully!", Toast.LENGTH_SHORT)
-                    .show();
+    public void stickerRemoveAll(View view) {
+        if (stickerView.getStickerCount() != 0) {
+            RemoveAllDIalog dIalog = new RemoveAllDIalog();
+            dIalog.setDialogListener(new RemoveAllDialogListener() {
+                @Override
+                public void onPositiveClicked() {
+                    stickerView.removeAllStickers();
+                }
+            });
+            dIalog.show(getActivity().getSupportFragmentManager(), "removeAll");
         } else {
-            Toast.makeText(getActivity(), "Remove current Sticker failed!", Toast.LENGTH_SHORT)
-                    .show();
+            Toast.makeText(getContext(), "초기화할 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void testRemoveAll(View view) {
-        stickerView.removeAllStickers();
+    public void stickerModify() {
+        if (SelectBitmap == null && SelectTextSticker == null) {
+            Toast.makeText(getActivity(), "선택된 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent;
+            if (selectType.equals("text")) {
+                intent = new Intent(getActivity().getApplicationContext(), ModifyTextStickerActivity.class);
+                intent.putExtra("textValue", SelectTextSticker.getText().toString());
+                startActivityForResult(intent, 630);
+                //630 : 텍스트 이미지 수정 리퀘스트 코드
+            } else if (selectType.equals("img")) {
+                intent = new Intent(getActivity().getApplicationContext(), ModifyImageActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
+    private void makeTextSticker(StickerView view, String txtValue, int txtColor) {
+        TextSticker addTextSticker = new TextSticker(getContext());
+        addTextSticker.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.sticker_transparent_background));
+        addTextSticker.setText(txtValue);
+        addTextSticker.setTextColor(txtColor);
+        addTextSticker.setTextAlign(Layout.Alignment.ALIGN_CENTER);
+        addTextSticker.resizeText();
+        view.addSticker(addTextSticker);
+    }
 
-    public void testLoad(View view) {
-//        final TextSticker sticker = new TextSticker(getActivity());
-//        sticker.setText("Hello, world!");
-//        sticker.setTextColor(Color.BLUE);
-//        sticker.setTextAlign(Layout.Alignment.ALIGN_CENTER);
-//        sticker.resizeText();
-//
-//        stickerView.addSticker(sticker);
+    public void stickerLoad(View view) {
         PopupMenu pm = new PopupMenu(getContext(), view);
         pm.getMenuInflater().inflate(R.menu.addmenu_collage, pm.getMenu());
         pm.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -239,58 +236,49 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    public void testModify(View view) {
-        if (SelectBitmap == null && SelectTextSticker == null) {
-            Toast.makeText(getActivity(), "선택된 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
-        } else {
-            Intent intent;
-            if (selectType.equals("text")) {
-                intent = new Intent(getActivity().getApplicationContext(), ModifyTextStickerActivity.class);
-                intent.putExtra("textValue",SelectTextSticker.getText().toString());
-                startActivityForResult(intent,630);
-                //630 : 텍스트 이미지 수정 리퀘스트 코드
-            } else if (selectType.equals("img")) {
-                intent = new Intent(getActivity().getApplicationContext(), GetImageActivity.class);
-                startActivity(intent);
-            }
-
-        }
-    }
-
-    public void stickerAdd(View view) {
+    public void stickerAdd() {
         if (SelectBitmap == null && sticker == null) {
             Toast.makeText(getActivity(), "선택된 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
-        } else if (selectType.equals("text")) {
-//            스티커 추가하도록 구현하기
-        } else if (selectType.equals("img")) {
-            stickerView.addSticker(new DrawableSticker(new BitmapDrawable(SelectBitmap)));
+        } else {
+            if (stickerView.getCurrentSticker() instanceof TextSticker) {
+                Toast.makeText(getContext(), "준비중 입니다.", Toast.LENGTH_SHORT).show();
+            } else if (stickerView.getCurrentSticker() instanceof Sticker) {
+                stickerView.addSticker(new DrawableSticker(stickerView.getCurrentSticker().getDrawable()));
+            }
         }
     }
 
     public void SaveImage(View v) {
         //결과를 저장하는 비트맵
-        SelectBitmap = stickerView.createBitmap();
+        if (stickerView.getStickerCount() != 0) {
+            SaveDialog dialog = new SaveDialog();
+            dialog.setDialogListener(new SaveDialogListener() {
+                @Override
+                public void onPositiveClicked() {
+                    Bitmap resultBitmap = stickerView.createBitmap();
+                    stickerView.addSticker(new DrawableSticker(new BitmapDrawable(resultBitmap)));
+                }
+
+                @Override
+                public void onNegativeClicked() {
+
+                }
+            });
+            dialog.show(getActivity().getSupportFragmentManager(), "save");
+        } else {
+            Toast.makeText(getContext(), "저장할 결과물이 없습니다.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setBtn(View v) {
-
         btnLoad = v.findViewById(R.id.btnLoad);
-        btnReplace = v.findViewById(R.id.btnReplace);
-        btnRemove = v.findViewById(R.id.btnRemove);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
         btnLock = v.findViewById(R.id.btnLock);
-        btnModify = v.findViewById(R.id.btnModify);
-        btnAdd = v.findViewById(R.id.btnAdd);
         btnSave = v.findViewById(R.id.btnSave);
 
-        btnModify.setOnClickListener(this);
         btnLoad.setOnClickListener(this);
         btnLock.setOnClickListener(this);
-        btnLoad.setOnClickListener(this);
-        btnRemove.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
-        btnReplace.setOnClickListener(this);
-        btnAdd.setOnClickListener(this);
         btnSave.setOnClickListener(this);
     }
 
@@ -298,25 +286,13 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLoad:
-                testLoad(v);
-                break;
-            case R.id.btnRemove:
-                testRemove(v);
+                stickerLoad(v);
                 break;
             case R.id.btnRemoveAll:
-                testRemoveAll(v);
-                break;
-            case R.id.btnReplace:
-                testReplace(v);
+                stickerRemoveAll(v);
                 break;
             case R.id.btnLock:
                 testLock(v);
-                break;
-            case R.id.btnModify:
-                testModify(v);
-                break;
-            case R.id.btnAdd:
-                stickerAdd(v);
                 break;
             case R.id.btnSave:
                 SaveImage(v);
@@ -324,4 +300,28 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    class ModifyIconEvent implements StickerIconEvent {
+
+        @Override
+        public void onActionDown(StickerView stickerView, MotionEvent event) {
+
+        }
+
+        @Override
+        public void onActionMove(StickerView stickerView, MotionEvent event) {
+
+        }
+
+        @Override
+        public void onActionUp(StickerView stickerView, MotionEvent event) {
+            if (stickerView.getCurrentSticker() instanceof TextSticker) {
+                SelectTextSticker = (TextSticker) stickerView.getCurrentSticker();
+                selectType = "text";
+            } else if (stickerView.getCurrentSticker() instanceof Sticker) {
+                SelectBitmap = ((BitmapDrawable) stickerView.getCurrentSticker().getDrawable()).getBitmap();
+                selectType = "img";
+            }
+            stickerModify();
+        }
+    }
 }

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        android:paddingVertical="15dp">
+
+        <ImageView
+            android:id="@+id/warningIcon"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/triangle" />
+
+        <TextView
+            android:id="@+id/warningtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquareb"
+            android:text="@string/deletedialog_msg"
+            android:textAlignment="center"
+            android:textColor="#ff5050"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/warningtext2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nanumsquarel"
+            android:text="@string/deletedialog_msg2"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
+
+            <TableRow android:gravity="center">
+
+                <Button
+                    android:id="@+id/remoevalldialog_deleteBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/removealldialog_deletebtn"
+                    android:text="삭제"
+                    android:textColor="#ffffff"
+                    android:textSize="20dp" />
+
+                <Button
+                    android:id="@+id/removealldialog_cancleBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="2"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/removealldialog_canclebtn"
+                    android:text="취소"
+                    android:textColor="#ff7761"
+                    android:textSize="20dp" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</LinearLayout>
