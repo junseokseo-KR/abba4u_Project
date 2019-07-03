@@ -15,17 +15,15 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.PopupMenu;
 import android.text.Layout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -68,9 +66,9 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
 
     public static StickerView stickerView;
     TextSticker sticker;
-    private FloatingActionButton btnRemoveAll, btnLoad, btnSave,btnScreenShot;
-
-
+    private FloatingActionButton btnRemoveAll, btnLoad, btnSave,btnScreenShot, btnMain;
+    private boolean isOpen = false;
+    private Animation fab_open, fab_close, fab_main_rotate_open,fab_main_rotate_close;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +77,13 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        //애니메이션 정의
+        fab_open = AnimationUtils.loadAnimation(getContext(),R.anim.fab_open);
+        fab_close = AnimationUtils.loadAnimation(getContext(),R.anim.fab_close);
+        fab_main_rotate_open = AnimationUtils.loadAnimation(getContext(),R.anim.fab_main_rotate_open);
+        fab_main_rotate_close = AnimationUtils.loadAnimation(getContext(),R.anim.fab_main_rotate_close);
+
         RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.collage_fragment, container, false);
         stickerView = (StickerView) layout.findViewById(R.id.sticker_view);
         BitmapStickerIcon deleteIcon = new BitmapStickerIcon(ContextCompat.getDrawable(getActivity(),
@@ -189,7 +194,9 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             });
             dIalog.show(getActivity().getSupportFragmentManager(), "removeAll");
         } else {
-            Toast.makeText(getContext(), "초기화할 스티커가 없습니다.", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(getContext(), "초기화할 스티커가 없습니다.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }
     }
 
@@ -289,26 +296,55 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             });
             dialog.show(getActivity().getSupportFragmentManager(), "save");
         } else {
-            Toast.makeText(getContext(), "저장할 결과물이 없습니다.", Toast.LENGTH_SHORT).show();
+            Toast toast = Toast.makeText(getContext(), "저장할 결과물이 없습니다.", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
         }
     }
 
     public void ScreenShot(View v){
-        Bitmap resultBitmap = stickerView.createBitmap();
-        stickerView.addSticker(new DrawableSticker(new BitmapDrawable(resultBitmap)));
+        if (stickerView.getStickerCount() != 0) {
+            Bitmap resultBitmap = stickerView.createBitmap();
+            stickerView.addSticker(new DrawableSticker(new BitmapDrawable(resultBitmap)));
+        }
+        else{
+            Toast toast = Toast.makeText(getContext(),"캡쳐할 영역이 비어있습니다.",Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER,0,0);
+            toast.show();
+        }
     }
+
+    public void coll_anim(View v){
+        if (isOpen){
+            btnMain.startAnimation(fab_main_rotate_close);
+            btnLoad.startAnimation(fab_close);
+            btnScreenShot.startAnimation(fab_close);
+            btnRemoveAll.startAnimation(fab_close);
+            btnSave.startAnimation(fab_close);
+            isOpen = false;
+        }else{
+            btnMain.startAnimation(fab_main_rotate_open);
+            btnLoad.startAnimation(fab_open);
+            btnScreenShot.startAnimation(fab_open);
+            btnRemoveAll.startAnimation(fab_open);
+            btnSave.startAnimation(fab_open);
+
+            isOpen = true;
+        }
+    }
+
     private void setBtn(View v) {
+        btnMain = v.findViewById(R.id.btnMain);
         btnLoad = v.findViewById(R.id.btnLoad);
         btnRemoveAll = v.findViewById(R.id.btnRemoveAll);
         btnSave = v.findViewById(R.id.btnSave);
         btnScreenShot = v.findViewById(R.id.btnScreenShot);
 
-
+        btnMain.setOnClickListener(this);
         btnLoad.setOnClickListener(this);
         btnRemoveAll.setOnClickListener(this);
         btnSave.setOnClickListener(this);
         btnScreenShot.setOnClickListener(this);
-
     }
 
     @Override
@@ -316,15 +352,22 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.btnLoad:
                 stickerLoad(v);
+                coll_anim(v);
                 break;
             case R.id.btnRemoveAll:
                 stickerRemoveAll(v);
+                coll_anim(v);
                 break;
             case R.id.btnSave:
                 SaveImage(v);
+                coll_anim(v);
                 break;
             case R.id.btnScreenShot:
                 ScreenShot(v);
+                coll_anim(v);
+                break;
+            case R.id.btnMain:
+                coll_anim(v);
                 break;
         }
     }

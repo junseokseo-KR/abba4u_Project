@@ -1,49 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/ts_view"
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/ts_viewEdit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:textAlignment="center"
         android:textSize="40sp"
         android:hint="텍스트를 입력하세요"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:layout_centerInParent="true"/>
-
+        android:backgroundTint="@android:color/transparent"
+        android:layout_weight="1"/>
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
-        android:layout_above="@id/ts_edit">
-        <TableRow
-            android:gravity="center">
+        android:layout_gravity="bottom"
+        >
+        <TableRow android:gravity="center">
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="50dp"
+                android:paddingTop="5dp"
+                android:layout_marginHorizontal="15dp"
                 android:onClick="openColorPicker"
-                android:text="색상변경"
-                android:layout_weight="1"/>
+                android:textAlignment="center"
+                android:drawableTop="@drawable/palette"
+                android:text="색상"
+                android:textSize="8sp"
+                android:background="@android:color/transparent"/>
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btnMake_TextSticker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingHorizontal="50dp"
+                android:paddingTop="5dp"
+                android:layout_marginHorizontal="15dp"
                 android:onClick="makeTextSticker"
-                android:text="스티커 만들기"
-                android:layout_weight="1"/>
+                android:drawableTop="@drawable/download"
+                android:text="완료"
+                android:textSize="8sp"
+                android:background="@android:color/transparent"/>
         </TableRow>
     </TableLayout>
-    <android.support.v7.widget.AppCompatEditText
-        android:layout_alignParentBottom="true"
-        android:id="@+id/ts_edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="텍스트를 입력하세요"
-        android:textAlignment="center"/>
-</RelativeLayout>
+</FrameLayout>

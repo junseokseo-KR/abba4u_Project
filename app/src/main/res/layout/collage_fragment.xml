@@ -7,12 +7,12 @@
     android:background="#E5E5E5"
     tools:context="com.example.abba4u_project.MainActivity">
 
-    <LinearLayout
+    <FrameLayout
         android:id="@+id/collague_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginRight="15dp"
         android:background="@drawable/canvas_layout"
         android:orientation="vertical">
@@ -20,7 +20,7 @@
         <com.xiaopo.flying.sticker.StickerView
             android:id="@+id/sticker_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             app:showBorder="true"
@@ -35,45 +35,63 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY" />
         </com.xiaopo.flying.sticker.StickerView>
-        <LinearLayout
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnLoad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:layout_gravity="center|bottom"
+            android:layout_marginRight="140dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/sticker"
+            android:visibility="invisible"
+            app:backgroundTint="#7f7f7f"
+            app:fabSize="mini" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btnLoad"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/sticker"
-                app:backgroundTint="#ffffff"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnRemoveAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/eraser"
+            android:visibility="invisible"
+            app:backgroundTint="#7f7f7f"
+            app:fabSize="mini" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btnRemoveAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/eraser"
-                app:backgroundTint="#ffffff"/>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btnMain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_add_white_18dp"
-                app:backgroundTint="#5b86e5"/>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btnScreenShot"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/screenshot"
-                app:backgroundTint="#ffffff"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnScreenShot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginLeft="70dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/screenshot"
+            android:visibility="invisible"
+            app:backgroundTint="#7f7f7f"
+            app:fabSize="mini" />
 
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/btnSave"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/download"
-                app:backgroundTint="#ffffff"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:layout_marginLeft="140dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/save"
+            android:visibility="invisible"
+            app:backgroundTint="#7f7f7f"
+            app:fabSize="mini" />
 
-        </LinearLayout>
-    </LinearLayout>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|bottom"
+            android:src="@drawable/baseline_add_white_18dp"
+            app:backgroundTint="#5b86e5" />
+
+        <!--</FrameLayout>-->
+    </FrameLayout>
 </RelativeLayout>

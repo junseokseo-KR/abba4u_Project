@@ -10,6 +10,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -18,33 +19,14 @@ public class GetTextStickerActivity extends Activity {
     AppCompatTextView ts_view;
     AppCompatButton btnTextColor;
     int textColor = 0xff000000;
-    Editable textValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gettextsticker_layout);
-        ts_edit = findViewById(R.id.ts_edit);
-        ts_view = findViewById(R.id.ts_view);
+        ts_edit = findViewById(R.id.ts_viewEdit);
         btnTextColor = findViewById(R.id.btnTextColor);
-        ts_edit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                //변경 전
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                //변경 시점
-                textValue = ts_edit.getText();
-                ts_view.setText(textValue);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                //변경 후
-            }
-        });
+        ts_edit.requestFocus();
     }
 
     public void openColorPicker(View v) {
@@ -53,7 +35,7 @@ public class GetTextStickerActivity extends Activity {
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 // color is the color selected by the user.
                 textColor = color;
-                ts_view.setTextColor(textColor);
+                ts_edit.setTextColor(textColor);
             }
 
             @Override
@@ -66,11 +48,16 @@ public class GetTextStickerActivity extends Activity {
     }
 
     public void makeTextSticker(View v){
-        Intent resultIntent = new Intent();
-        resultIntent.putExtra("textValue", textValue.toString());
-        resultIntent.putExtra("textColor", textColor);
-        setResult(629,resultIntent);
-        finish();
+        if (ts_edit.getText() != null) {
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("textValue", ts_edit.getText().toString());
+            resultIntent.putExtra("textColor", textColor);
+            setResult(629, resultIntent);
+            finish();
+        }
+        else if (ts_edit.getText() == null){
+            Toast.makeText(getApplicationContext(),"입력된 텍스트가 없습니다.",Toast.LENGTH_SHORT);
+        }
     }
 
 }

@@ -16,9 +16,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.abba4u_project.Module.Adapter.MainPagerAdapter;
+import com.example.abba4u_project.Module.ViewPager.CustomViewPager;
 
 public class MainActivity extends AppCompatActivity {
-    ViewPager viewPager;
+    CustomViewPager viewPager;
     TabLayout tabLayout;
     MainPagerAdapter pa;
     @Override
@@ -49,13 +50,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(TabLayout.Tab tab) {
 
             }
+
         });
     }
-    View.OnClickListener movePageListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            int tag = (int) v.getTag();
-            viewPager.setCurrentItem(tag);
-        }
-    };
 }
