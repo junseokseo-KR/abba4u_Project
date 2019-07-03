@@ -27,6 +27,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.abba4u_project.CustomTextSticker;
 import com.example.abba4u_project.GetImageActivity;
 import com.example.abba4u_project.GetTextStickerActivity;
 import com.example.abba4u_project.ModifyImageActivity;
@@ -65,7 +66,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     }
 
     public static StickerView stickerView;
-    TextSticker sticker;
+    CustomTextSticker sticker;
     private FloatingActionButton btnRemoveAll, btnLoad, btnSave,btnScreenShot, btnMain;
     private boolean isOpen = false;
     private Animation fab_open, fab_close, fab_main_rotate_open,fab_main_rotate_close;
@@ -112,7 +113,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         stickerView.setLocked(false);
         stickerView.setConstrained(true);
 
-        sticker = new TextSticker(getActivity());
+        sticker = new CustomTextSticker(getActivity());
 
         sticker.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.sticker_transparent_background));
         sticker.setText("텍스트 입력");
@@ -129,7 +130,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onStickerClicked(@NonNull Sticker sticker) {
                 if (sticker instanceof TextSticker) {
-                    SelectTextSticker = (TextSticker) sticker;
+                    SelectTextSticker = (CustomTextSticker) sticker;
                     selectType = "text";
                 } else {
                     SelectBitmap = ((BitmapDrawable) stickerView.getCurrentSticker().getDrawable()).getBitmap();
@@ -208,6 +209,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
             if (selectType.equals("text")) {
                 intent = new Intent(getActivity().getApplicationContext(), ModifyTextStickerActivity.class);
                 intent.putExtra("textValue", SelectTextSticker.getText().toString());
+                intent.putExtra("textColor", String.valueOf(SelectTextSticker.getTextColor()));
                 startActivityForResult(intent, 630);
                 //630 : 텍스트 이미지 수정 리퀘스트 코드
             } else if (selectType.equals("img")) {
@@ -218,7 +220,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
     }
 
     private void makeTextSticker(StickerView view, String txtValue, int txtColor) {
-        TextSticker addTextSticker = new TextSticker(getContext());
+        TextSticker addTextSticker = new CustomTextSticker(getContext());
         addTextSticker.setDrawable(ContextCompat.getDrawable(getActivity(), R.drawable.sticker_transparent_background));
         addTextSticker.setText(txtValue);
         addTextSticker.setTextColor(txtColor);
@@ -387,7 +389,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onActionUp(StickerView stickerView, MotionEvent event) {
             if (stickerView.getCurrentSticker() instanceof TextSticker) {
-                SelectTextSticker = (TextSticker) stickerView.getCurrentSticker();
+                SelectTextSticker = (CustomTextSticker) stickerView.getCurrentSticker();
                 selectType = "text";
             } else if (stickerView.getCurrentSticker() instanceof Sticker) {
                 SelectBitmap = ((BitmapDrawable) stickerView.getCurrentSticker().getDrawable()).getBitmap();

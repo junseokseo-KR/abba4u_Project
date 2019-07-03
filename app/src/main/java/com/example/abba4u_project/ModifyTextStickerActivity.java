@@ -8,14 +8,14 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class ModifyTextStickerActivity extends Activity {
     AppCompatEditText ts_edit;
     AppCompatButton btnTextColor;
-    int textColor = 0xff000000;
-
+    int textColor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +23,8 @@ public class ModifyTextStickerActivity extends Activity {
         Intent intent = getIntent();
         ts_edit = findViewById(R.id.ts_view_modify);
         ts_edit.setText(intent.getStringExtra("textValue"));
+        textColor = Integer.parseInt(intent.getStringExtra("textColor"));
+        ts_edit.setTextColor(textColor);
         btnTextColor = findViewById(R.id.btnTextColor_modify);
         ts_edit.requestFocus();
     }
