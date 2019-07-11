@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E5E5E5"
-    tools:context="com.example.abba4u_project.MainActivity">
+    tools:context="com.tony0326.abba4u_project.com.tony0326.abba4u_project.MainActivity">
 
     <FrameLayout
         android:id="@+id/collague_main"
@@ -17,7 +17,7 @@
         android:background="@drawable/canvas_layout"
         android:orientation="vertical">
 
-        <com.xiaopo.flying.sticker.StickerView
+        <com.tony0326.abba4u_project.CustomStickerView
             android:id="@+id/sticker_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY" />
-        </com.xiaopo.flying.sticker.StickerView>
+        </com.tony0326.abba4u_project.CustomStickerView>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/btnLoad"
@@ -61,13 +61,13 @@
             app:fabSize="mini" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btnScreenShot"
+            android:id="@+id/btnUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|bottom"
             android:layout_marginLeft="70dp"
             android:layout_marginBottom="10dp"
-            android:src="@drawable/screenshot"
+            android:src="@drawable/hastag"
             android:visibility="invisible"
             app:backgroundTint="#7f7f7f"
             app:fabSize="mini" />

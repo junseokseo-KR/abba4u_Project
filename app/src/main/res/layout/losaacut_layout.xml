@@ -5,19 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LassoCutActivity"
+    tools:context="com.tony0326.abba4u_project.LassoCutActivity"
+    android:splitMotionEvents="false"
     >
-    <!--<fragment-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:id="@+id/lassofragment"-->
-    <!--android:name="com.example.abba4u_project.LassoFragment"/>-->
-
-
     <fragment
-        android:id="@+id/fff"
-        android:name="com.example.abba4u_project.Module.Fragment.LassoCutFragment"
+        android:name="com.tony0326.abba4u_project.Module.Fragment.LassoCutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </FrameLayout>

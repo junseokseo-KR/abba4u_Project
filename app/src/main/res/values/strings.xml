@@ -2,11 +2,16 @@
     <string name="app_name">아바예술심리교육연구소</string>
     <string name="permission_deny">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
     <string name="permission_rational">사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.</string>
-    <string name="deletedialog_msg">배치된 스티커 초기화!</string>
+    <string name="deletedialog_msg">스티커 초기화</string>
     <string name="deletedialog_msg2">삭제된 스티커는\n복구되지 않습니다!</string>
-    <string name="savedialog_msg">결과물 저장 성공!</string>
-    <string name="savedialog_msg2">이어서 하시겠습니까?</string>
+    <string name="savedialog_msg">결과물 저장</string>
+    <string name="savedialog_msg2">결과물을 저장하시겠습니까?</string>
     <string name="selectdialog_msg">스티커 종류</string>
     <string name="selectdialog_msg2">어떤 스티커를 만드시겠습니까?</string>
     <string name="NoSettingImg">이미지를 선택해야 합니다.</string>
+
+    <!--로그인 창-->
+    <string name="login_name">이름</string>
+    <string name="login_birth">생년월일</string>
+    <string name="login_birth_err">생년월일은 6자리입니다. ex)960326</string>
 </resources>

@@ -34,7 +34,7 @@
                 android:textAlignment="center"
                 android:drawableTop="@drawable/palette"
                 android:text="색상"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:background="@android:color/transparent"
                 />
 
@@ -48,7 +48,7 @@
                 android:onClick="modifyTextSticker"
                 android:drawableTop="@drawable/reload"
                 android:text="수정"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:background="@android:color/transparent"
                 />
         </TableRow>

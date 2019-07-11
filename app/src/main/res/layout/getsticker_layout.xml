@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <com.github.chrisbanes.photoview.PhotoView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <fragment
         android:id="@+id/photoview"
-        android:layout_gravity="center"/>
+        android:name="com.tony0326.abba4u_project.Module.Fragment.LassoCutFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnCanvasReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginRight="30dp"
+        android:src="@drawable/eraser"
+        app:backgroundTint="#7f7f7f"
+        android:visibility="invisible"
+        app:fabSize="auto" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnCut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="30dp"
+        android:src="@drawable/lasso_mono"
+        app:backgroundTint="#ffffff"
+        android:visibility="invisible"
+        app:fabSize="auto" />
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,14 +52,11 @@
                 android:drawableTop="@drawable/gallery"
                 android:background="@android:color/transparent"/>
             <Button
-                android:text="사진자르기"
                 android:textSize="10sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/btnCut"
-                android:onClick="goToCut"
-                android:drawableTop="@drawable/lasso"
+                android:id="@+id/btnMode"
                 android:background="@android:color/transparent"/>
             <Button
                 android:text="추가"

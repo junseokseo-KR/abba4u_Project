@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.abba4u_project">
+    package="com.tony0326.abba4u_project">
     <!--카메라, 갤러리 권한-->
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <!--인터넷 권한-->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!--진동 권한-->
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:allowBackup="true"
@@ -14,20 +16,23 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.tony0326.abba4u_project.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LassoCutActivity"/>
-        <activity android:name=".GetImageActivity"/>
-        <activity android:name=".GetTextStickerActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".ModifyImageActivity"/>
-        <activity android:name=".ModifyTextStickerActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".CropActivity"/>
-        <activity android:name=".ColorPreferenceActiviy"/>
+        <activity android:name="com.tony0326.abba4u_project.JoinActivity"/>
+        <activity android:name="com.tony0326.abba4u_project.MainActivity" android:configChanges="screenSize|orientation"/>
+        <activity android:name="com.tony0326.abba4u_project.LassoCutActivity" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.GetImageActivity" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.GetTextStickerActivity" android:windowSoftInputMode="adjustResize" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.ModifyImageActivity" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.ModifyTextStickerActivity" android:windowSoftInputMode="adjustResize" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.CropActivity" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
+        <activity android:name="com.tony0326.abba4u_project.ColorPreferenceActiviy" android:configChanges="screenSize|orientation" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

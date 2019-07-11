@@ -32,7 +32,7 @@
                 android:textAlignment="center"
                 android:drawableTop="@drawable/palette"
                 android:text="색상"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 android:background="@android:color/transparent"/>
 
             <android.support.v7.widget.AppCompatButton
@@ -45,7 +45,7 @@
                 android:onClick="makeTextSticker"
                 android:drawableTop="@drawable/download"
                 android:text="완료"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 android:background="@android:color/transparent"/>
         </TableRow>
     </TableLayout>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="15dp">
+
+    <ImageView
+        android:id="@+id/selectIcon"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:src="@drawable/hastag_color"
+        android:layout_marginBottom="30dp"/>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleLayout"
+        android:theme="@style/DescriptionTheme">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="제목"
+            android:id="@+id/titleEdit"
+            android:singleLine="true"/>
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contentLayout"
+        android:theme="@style/DescriptionTheme">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="간단한 설명"
+            android:id="@+id/contentEdit"/>
+    </android.support.design.widget.TextInputLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
+
+        <TableRow android:gravity="center">
+            <Button
+                android:id="@+id/descriptiondialog_saveBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/descriptiondialog_savebtn"
+                android:text="저장"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/descriptiondialog_cancleBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="2"
+                android:layout_marginHorizontal="15dp"
+                android:background="@drawable/descriptiondialog_canclebtn"
+                android:text="취소"
+                android:textColor="#058FFF"
+                android:textSize="20dp" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

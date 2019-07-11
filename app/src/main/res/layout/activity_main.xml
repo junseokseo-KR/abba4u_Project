@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="com.tony0326.abba4u_project.MainActivity">
 
-    <com.example.abba4u_project.Module.ViewPager.CustomViewPager
+    <com.tony0326.abba4u_project.Module.ViewPager.CustomViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
