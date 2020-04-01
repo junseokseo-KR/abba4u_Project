@@ -1,6 +1,7 @@
 package com.tony0326.abba4u_project;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.tony0326.abba4u_project.Module.Fragment.LassoCutFragment;
 
@@ -21,4 +22,6 @@ public class staticData {
     public static boolean cut = false;
     public static String coll_title = "No Title";
     public static String coll_content = "No Content";
+    public static Uri result_coll_uri = null;
+    public static String userID = "";
 }

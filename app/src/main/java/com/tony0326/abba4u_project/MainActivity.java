@@ -3,6 +3,7 @@
  */
 package com.tony0326.abba4u_project;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,16 +11,17 @@ import android.os.Bundle;
 import com.tony0326.abba4u_project.Module.Adapter.MainPagerAdapter;
 import com.tony0326.abba4u_project.Module.ViewPager.CustomViewPager;
 import com.tony0326.abba4u_project.R;
+import static com.tony0326.abba4u_project.staticData.userID;
 
 public class MainActivity extends AppCompatActivity {
     CustomViewPager viewPager;
     TabLayout tabLayout;
     MainPagerAdapter pa;
-    @Override
+    Intent intent;
+    UserData user;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         pa = new MainPagerAdapter(getSupportFragmentManager());
 
         viewPager = findViewById(R.id.vp);

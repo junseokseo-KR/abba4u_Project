@@ -4,6 +4,7 @@
 package com.tony0326.abba4u_project.Module.Fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -31,6 +32,8 @@ import com.tony0326.abba4u_project.CustomStickerView;
 import com.tony0326.abba4u_project.CustomTextSticker;
 import com.tony0326.abba4u_project.GetImageActivity;
 import com.tony0326.abba4u_project.GetTextStickerActivity;
+import com.tony0326.abba4u_project.ImageAsyncTask;
+import com.tony0326.abba4u_project.MainActivity;
 import com.tony0326.abba4u_project.ModifyImageActivity;
 import com.tony0326.abba4u_project.ModifyTextStickerActivity;
 import com.tony0326.abba4u_project.Module.Dialog.DescriptionDialog;
@@ -41,6 +44,7 @@ import com.tony0326.abba4u_project.Module.Listener.RemoveAllDialogListener;
 import com.tony0326.abba4u_project.Module.Listener.SaveDialogListener;
 import com.tony0326.abba4u_project.Module.Listener.SelectDialogListener;
 import com.tony0326.abba4u_project.R;
+import com.tony0326.abba4u_project.UserAsyncTask;
 import com.tony0326.abba4u_project.staticData;
 import com.xiaopo.flying.sticker.BitmapStickerIcon;
 import com.xiaopo.flying.sticker.DeleteIconEvent;
@@ -59,6 +63,12 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
+
+import static com.tony0326.abba4u_project.staticData.coll_content;
+import static com.tony0326.abba4u_project.staticData.coll_title;
+import static com.tony0326.abba4u_project.staticData.result_coll_uri;
+import static com.tony0326.abba4u_project.staticData.userID;
 
 public class CollageFragment extends Fragment implements View.OnClickListener {
     public CollageFragment() {
@@ -266,6 +276,7 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                 dialog.setDialogListener(new SaveDialogListener() {
                     @Override
                     public void onPositiveClicked() {
+                        String filePath ="";
                         String msg = "";
                         String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/Abba";
                         File file = new File(path);
@@ -278,9 +289,10 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                         FileOutputStream fos = null;
                         Bitmap resultBitmap = stickerView.createBitmap();
                         try {
-                            fos = new FileOutputStream(path + "/결과물" + day.format(date) + ".jpeg");
+                            filePath = path + "/"+ staticData.coll_title+ day.format(date) + ".jpeg";
+                            fos = new FileOutputStream(filePath);
                             resultBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + path + "/"+ staticData.coll_title+"/"+ day.format(date) + ".jpeg")));
+                            getActivity().sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + filePath)));
                             msg += "결과물이 갤러리에 저장되었습니다.";
                             showToast(msg);
                             fos.flush();
@@ -290,12 +302,40 @@ public class CollageFragment extends Fragment implements View.OnClickListener {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+
+                        ImageAsyncTask task = new ImageAsyncTask(getContext());
+                        Log.i("저장경로",filePath);
+                        try {
+                            String[] res = task.execute(filePath,"result").get();
+                            if (res[0].equals("upLoadSuccess")){
+                                Log.i("결과",res[0]);
+                                String id = userID;
+                                String title = coll_title;
+                                String content = coll_content;
+                                String imgURL = res[1];
+                                int stickerCnt = stickerView.getStickerCount();
+                                Log.i("전송 결과",id+" / "+title+" / "+content+" / "+imgURL+" / "+stickerCnt);
+                                UserAsyncTask task2 = new UserAsyncTask();
+                                try {
+                                    String res2 = task2.execute("sendResult", id, title, content, imgURL, String.valueOf(stickerCnt)).get();
+                                    Log.i("결과",res2);
+                                } catch (ExecutionException e) {
+                                    e.printStackTrace();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        } catch (ExecutionException e) {
+                            e.printStackTrace();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        stickerView.sendSticker();
                     }
 
                     @Override
                     public void onNegativeClicked() {
-                        String res = stickerView.sendResult();
-                        Log.i("결과",res);
+
                     }
                 });
                 dialog.show(getActivity().getSupportFragmentManager(), "save");

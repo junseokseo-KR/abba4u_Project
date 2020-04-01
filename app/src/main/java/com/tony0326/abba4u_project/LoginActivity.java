@@ -2,6 +2,7 @@ package com.tony0326.abba4u_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.tony0326.abba4u_project.R;
 
 import java.util.concurrent.ExecutionException;
+
+import static com.tony0326.abba4u_project.staticData.userID;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputLayout idLayout,pwdLayout;
@@ -66,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     if (res.contains("loginSuccess")) {
                         showToast("로그인 성공");
                         Intent loginIntent = new Intent(this, MainActivity.class);
+                        userID = id;
                         startActivity(loginIntent);
                     } else if (res.contains("noAccount")) {
                         showToast("존재하지 않는 계정입니다.");
