@@ -1,5 +1,5 @@
-<img src="readmeimg/bluebox.png" width="80%" height="80%"/><br/>
-# BlueBox
+<img src="readmeimg/abba4u.png" width="80%" height="80%"/><br/>
+# 콜라주 App
 1. 개발동기와 주제
  * 미술 치료는 미술 활동을 통해서 심리적인 어려움이나 문제를 표현하고 치료할 수
 있도록 하는 활동이다.<br/>
@@ -19,14 +19,16 @@
     * 버전 관리
       * Git
 2. 기능
-    * 어플리케이션 기능
-      * 택배함 상태 표현
-      * 송장번호 추가 후 배송상태 조회
-      * 잠금 설정/해제와 비밀번호 실패, 경보작동 기록 출력
-    * 임베디드 작품[택배함]
-      * 비밀번호 입력 및 잠금
-      * 충격 시 경보음 작동
-      * 비밀번호 3회 실패시 경보음 작동
-3. 시연 영상
-   1. <a href="https://www.youtube.com/watch?v=5LMG8g9TP5U">어플리케이션 시연</a>
-   2. <a href="https://www.youtube.com/watch?v=effrFTRTIs8">임베디드 시연</a>
+    * 회원 계정
+    * 콜라주
+      * 메인화면
+        * 플로팅 액션 버튼<br/><img src="readmeimg/fab.png" width="70%" height="70%"><br/>
+        * 커스텀 다이얼로그<br/><img src="readmeimg/dial.png" width="70%" height="70%"><br/>
+      * 이미지 콜라주
+        * 아이콘 버튼<br/><img src="readmeimg/icon.png" width="70%" height="70%"><br/>
+        * 이미지 편집<br/><img src="readmeimg/img.png" width="70%" height="70%"><br/>
+        * 텍스트 편집<br/><img src="readmeimg/text.png" width="70%" height="70%"><br/>
+      * 관리자 페이지
+        * 회원 관리<br/><img src="readmeimg/list.png" width="70%" height="70%"><br/>
+        * 회원별 결과물 조회<br/><img src="readmeimg/res.png" width="70%" height="70%"><br/>
+        * 결과물 데이터 조회<br/><img src="readmeimg/data.png" width="70%" height="70%"><br/>
