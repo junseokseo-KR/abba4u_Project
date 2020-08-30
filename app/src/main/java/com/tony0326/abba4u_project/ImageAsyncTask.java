@@ -47,7 +47,7 @@ public class ImageAsyncTask extends AsyncTask<String, String, String[]> {
         } else{
             try {
                 FileInputStream fis = new FileInputStream(imageFile);
-                String ip_Address = "192.168.0.3";
+                String ip_Address = "";
 
                 URL url = null;
                 if (strings[1].equals("result")){
