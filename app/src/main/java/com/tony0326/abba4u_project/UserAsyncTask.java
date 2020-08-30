@@ -25,7 +25,7 @@ public class UserAsyncTask extends AsyncTask<String, Void, String> {
             String str;
 
             //서버의 ip가 변경될때마다 바꿔줘야함
-            String ip_Address = "192.168.0.3";
+            String ip_Address = "";
 
             URL url = new URL("http://" + ip_Address + ":8090/Abba4U_Project/userDataPage.jsp");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
