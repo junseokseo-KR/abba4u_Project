@@ -42,7 +42,6 @@ public class ImageAsyncTask extends AsyncTask<String, String, String[]> {
         this.imageFile = new File(strings[0]);
 
         if (!imageFile.isFile()){
-            Log.i("fileIs?","No");
             result[0] = "upLoadFail";
             return result;
         } else{
@@ -57,8 +56,7 @@ public class ImageAsyncTask extends AsyncTask<String, String, String[]> {
                 if (strings[1].equals("sticker")){
                     url= new URL("http://"+ip_Address+":8090/Abba4U_Project/upload.jsp?id="+userID+"&title="+coll_title+"&type=sticker");
                 }
-
-                Log.i("들어옴?", "ㅇㅇ");
+                
                 //connection 열기
                 conn = (HttpURLConnection) url.openConnection();
                 conn.setDoInput(true); // input 허용
