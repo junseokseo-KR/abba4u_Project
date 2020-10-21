@@ -9,12 +9,15 @@
 
 
 2. 소프트웨어 환경
-    * 어플리케이션 개발
-      * 언어 : 자바
-      * 개발도구 : 안드로이드 스튜디오
-    * 서버 개발
-      * 언어 : 자바, JSP, HTML, CSS, 자바스크립트
-      * 개발도구 : 이클립스
+    * 어플리케이션
+      * 언어 : Java
+      * 개발도구 : Android Studio
+    * 관리자 페이지
+      * 언어 : Java, HTML, CSS, Javascript
+      * 개발도구 : Eclipse
+    * 서버
+      * 언어 : JSP
+      * 개발도구 : Eclipse
     * 데이터베이스
       * MySQL
     * 버전 관리
